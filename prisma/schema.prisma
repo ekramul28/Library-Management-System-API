@@ -20,4 +20,38 @@ model Book{
   publishedYear Int
   totalCopies Int
   availableCopies Int
+  @@map("books")
+
+  BorrowRecords   BorrowRecord[]
 }
+
+model Author{
+    autherId String @unique @default(uuid())
+    name String
+    bio String
+    deteOfBirth DateTime
+    @@map("authors")
+}
+
+model Member{
+    memberId String @unique @default(uuid())
+    name String
+    email String @unique
+    phone String
+    membershipDate DateTime
+    @@map("members")
+    BorrowRecords  BorrowRecord[]
+}
+
+model BorrowRecord {
+  id String @unique @default(uuid())
+  borrowDate DateTime
+  returnDate DateTime
+
+  bookId String   
+  memberId String   
+  
+  Book Book @relation(fields: [bookId], references: [bookId])
+  Member Member @relation(fields: [memberId], references: [memberId])
+}
+
