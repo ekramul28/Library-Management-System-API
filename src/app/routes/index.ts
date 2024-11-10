@@ -1,11 +1,12 @@
 import express from "express";
+import { BookRouter } from "../modules/Book/book.route";
 
 const router = express.Router();
 
 const moduleRoutes = [
   {
     path: "/user",
-    router: "UserRoute",
+    router: BookRouter,
   },
 ];
 

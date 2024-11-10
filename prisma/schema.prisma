@@ -20,6 +20,7 @@ model Book{
   publishedYear Int
   totalCopies Int
   availableCopies Int
+  isDeleted Boolean @default(true)
   @@map("books")
 
   BorrowRecords   BorrowRecord[]
@@ -53,5 +54,7 @@ model BorrowRecord {
   
   Book Book @relation(fields: [bookId], references: [bookId])
   Member Member @relation(fields: [memberId], references: [memberId])
+
+  @@map("borrowRecords")
 }
 
