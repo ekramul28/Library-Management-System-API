@@ -34,19 +34,13 @@ const getBookFromDB = async (params: any, options: any) => {
 
   andCondition.push({ isDeleted: false });
 
-  const whereConditions: Prisma.BookWhereInput = { AND: andCondition };
+  const whereConditions: Prisma.BookWhereInput | Prisma.BookWhereInput[] = {
+    AND: andCondition,
+  };
   const result = await prisma.book.findMany({
     where: whereConditions,
     skip,
     take: limit,
-    orderBy:
-      options.sortBy && options.sortOrder
-        ? {
-            [options.sortBy]: options.sortOrder,
-          }
-        : {
-            createdAt: "desc",
-          },
   });
   const total = await prisma.book.count({
     where: whereConditions,

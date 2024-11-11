@@ -32,21 +32,11 @@ const getMemberFromDB = async (params: any, options: any) => {
     });
   }
 
-  andCondition.push({ isDeleted: false });
-
   const whereConditions: Prisma.MemberWhereInput = { AND: andCondition };
   const result = await prisma.member.findMany({
     where: whereConditions,
     skip,
     take: limit,
-    orderBy:
-      options.sortBy && options.sortOrder
-        ? {
-            [options.sortBy]: options.sortOrder,
-          }
-        : {
-            createdAt: "desc",
-          },
   });
   const total = await prisma.member.count({
     where: whereConditions,
@@ -65,7 +55,6 @@ const getMemberByIdFromDB = async (id: string): Promise<Member | null> => {
   const result = await prisma.member.findUnique({
     where: {
       memberId: id,
-      isDeleted: false,
     },
   });
   return result;
@@ -78,7 +67,6 @@ const updateMemberFromDB = async (
   await prisma.member.findUniqueOrThrow({
     where: {
       memberId: id,
-      isDeleted: false,
     },
   });
   const result = await prisma.member.update({

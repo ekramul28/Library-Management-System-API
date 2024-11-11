@@ -7,7 +7,7 @@ const router = express.Router();
 
 const moduleRoutes = [
   {
-    path: "/book",
+    path: "/books",
     router: BookRouter,
   },
   {
