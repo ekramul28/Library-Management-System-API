@@ -3,6 +3,11 @@ import calculatePagination from "../../helpars/paginationHelper";
 import prisma from "../shared/prisma";
 import { BookSearchAbleFields } from "./book.constant";
 
+const createBookFromDb = async (payload: any) => {
+  const result = await prisma.book.create({ data: payload });
+  return result;
+};
+
 const getBookFromDB = async (params: any, options: any) => {
   const { page, limit, skip, sortBy, sortOrder } = calculatePagination(options);
   const { searchTerm, ...filterData } = params;
@@ -122,6 +127,7 @@ const deleteBookFromDB = async (id: string): Promise<Book | null> => {
 };
 
 export const BookService = {
+  createBookFromDb,
   getBookFromDB,
   getBookByIdFromDB,
   updateBookFromDB,

@@ -6,6 +6,17 @@ import catchAsync from "../../middlewares/catchAsync";
 import { BookFilterableFields } from "./book.constant";
 import { BookService } from "./book.service";
 
+const createBook: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const result = await BookService.createBookFromDb(req.body);
+    sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Book created successfully",
+      data: result,
+    });
+  }
+);
 const getBook: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const filters = pick(req.query, BookFilterableFields);
@@ -16,7 +27,7 @@ const getBook: RequestHandler = catchAsync(
     sendResponse(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "Admin Data fetched",
+      message: "Books retrieved successfully",
       meta: result.meta,
       data: result.data,
     });
@@ -28,7 +39,7 @@ const getBookById = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Admin Data fetched",
+    message: "Book retrieved successfully",
     data: result,
   });
 });
@@ -40,23 +51,24 @@ const updateBook = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Updated Successful ",
+    message: "Book updated successfully ",
     data: result,
   });
 });
 const deleteBook = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const result = await BookService.deleteBookFromDB(id);
+  await BookService.deleteBookFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Delete Successful",
-    data: result,
+    message: "Book successfully deleted",
+    data: null,
   });
 });
 
 export const BookController = {
+  createBook,
   getBook,
   getBookById,
   updateBook,
