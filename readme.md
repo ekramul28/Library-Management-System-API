@@ -1,12 +1,14 @@
-# Project Name: [Your Project Name]
+# Project Name: Library-Management-System-API
 
 ### **Installation**
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
+   git clone https://github.com/ekramul28/Library-Management-System-API
+
+   cd Library-Management-System-API
+
    npm install
    npm run dev
 
@@ -17,7 +19,6 @@
 ```bash
 
 DATABASE_URL=your-database-url
-JWT_SECRET=your-jwt-secret
 
 ```
 
@@ -45,10 +46,6 @@ You can access the live backend deployment here: [Live URL](https://example.com)
 ### **Packages**
 
 - `dotenv` - For managing environment variables
-- `jsonwebtoken` - For implementing authentication and authorization
-- `bcrypt` - For hashing passwords
-- `cors` - For handling Cross-Origin Resource Sharing
-- `zod` - For schema validation
 - [Add other packages and briefly describe their purpose]
 
 ---
