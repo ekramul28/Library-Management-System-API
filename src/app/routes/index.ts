@@ -11,11 +11,11 @@ const moduleRoutes = [
     router: BookRouter,
   },
   {
-    path: "/member",
+    path: "/members",
     router: MemberRouter,
   },
   {
-    path: "/member",
+    path: "/borrow",
     router: BorrowRouter,
   },
 ];

@@ -52,13 +52,11 @@ model Member{
 
 model BorrowRecord {
   id String @unique @default(uuid())
-  borrowDate DateTime
-  returnDate DateTime
-
+  borrowDate DateTime @default(now())
+  returnDate DateTime?
   bookId String   
   memberId String   
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  
   
   Book Book @relation(fields: [bookId], references: [bookId])
   Member Member @relation(fields: [memberId], references: [memberId])

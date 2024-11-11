@@ -1,11 +1,36 @@
 import prisma from "../shared/prisma";
-
-const createBorrow = async (payload: any) => {
-  const result = await prisma.borrowRecord.create({ data: payload });
-  return result;
+type BorrowPayload = {
+  bookId: string;
+  memberId: string;
 };
-const returnBorrow = async (payload: any) => {
+
+type ReturnPayload = {
+  borrowId: string;
+  returnDate: Date;
+};
+
+const createBorrow = async (payload: BorrowPayload) => {
   const result = await prisma.borrowRecord.create({ data: payload });
+  return {
+    borrowId: result.bookId,
+    bookId: result.bookId,
+    memberId: result.memberId,
+    borrowDate: result.borrowDate,
+  };
+};
+const returnBorrow = async (payload: ReturnPayload) => {
+  const { borrowId } = payload;
+  await prisma.borrowRecord.findUniqueOrThrow({
+    where: {
+      id: borrowId,
+    },
+  });
+
+  const result = await prisma.borrowRecord.update({
+    where: { id: borrowId },
+    data: { returnDate: new Date() },
+  });
+
   return result;
 };
 
