@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
         message: "server is running",
     });
 });
-app.use("/api/v1", routes_1.default);
+app.use("/api", routes_1.default);
 app.use(globalErrorHandaler_1.default);
 app.use((req, res, next) => {
     res.status(http_status_1.default.NOT_FOUND).json({

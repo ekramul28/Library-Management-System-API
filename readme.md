@@ -30,7 +30,7 @@ DATABASE_URL=your-database-url
 
 ## Live URL
 
-You can access the live backend deployment here: [Live URL](https://example.com)
+You can access the live backend deployment here: [Live URL](https://library-management-system-api-teal.vercel.app)
 
 ---
 
